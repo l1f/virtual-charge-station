@@ -7,7 +7,7 @@ In doing so, I have repeatedly encountered the problem that I lack the possibili
 in order to be able to carry out tests quickly. 
 
 This meant that I needed a physical charging station at all times to test whether my server was working properly. 
-- Which made it difficult to work from anywhere that wasn't my desk.
+Which made it difficult to work from anywhere that wasn't my desk.
 
 So here's the next project, which I'm going to work on very intensively for two weeks and then probably won't touch for 
 a very long time because my focus will switch to something else.
