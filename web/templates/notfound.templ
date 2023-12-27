@@ -1,9 +1,7 @@
 package templates
 
 templ NotFound() {
-  <div class="container">
-  <div class="notification is-primary">
-    This container is <strong>centered</strong> on desktop and larger viewports.
-  </div>
-</div>
+	@body("Page not found :(") {
+		<h1 class="is-size-1 has-text-centered is-uppercase is-family-primary">Page not found!</h1>
+	}
 }

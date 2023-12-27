@@ -1,0 +1,47 @@
+package templates
+
+templ base(title string) {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<title>{ title }</title>
+			<meta charset="utf-8"/>
+			<meta name="description" content="Sample page styled with Bulma CSS using Bulma LIVE editor."/>
+			<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+			<meta name="author" content="AppSeed"/>
+			<link rel="stylesheet" href="/assets/bulma.css" crossorigin="anonymous"/>
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" crossorigin="anonymous"/>
+		</head>
+		{ children... }
+	</html>
+}
+
+templ menu() {
+	<nav class="navbar is-black" role="navigation" aria-label="main navigation">
+		<div class="navbar-brand">
+			<a class="navbar-item" href="/dashboard">VCS</a>
+			<a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+				<span aria-hidden="true"></span>
+				<span aria-hidden="true"></span>
+				<span aria-hidden="true"></span>
+			</a>
+		</div>
+		<div class="navbar-menu">
+			<div class="navbar-start">
+			</div>
+			<div class="navbar-end">
+			</div>
+		</div>
+	</nav>
+}
+
+templ body(title string) {
+	@base(title) {
+		<body>
+			@menu()
+			<div class="container">
+			{ children... }
+			</div>
+		</body>
+	}
+}
