@@ -1,7 +1,6 @@
 package router
 
 import (
-	"io"
 	"net/http"
 
 	"github.com/go-chi/chi/middleware"
@@ -27,11 +26,7 @@ func getRouter(app *app.App) *chi.Mux {
 	router.Handle("/assets/*", http.StripPrefix("/assets/", http.FileServer(http.Dir("./web/assets/"))))
 
 	router.NotFound(handlers.NotFound)
-
-	router.Get("/test", func(w http.ResponseWriter, r *http.Request) {
-		app.Logger.Info("Test")
-		io.WriteString(w, "Test!")
-	})
+	router.Get("/dashboard", handler.Dashboard)
 
 	return router
 }

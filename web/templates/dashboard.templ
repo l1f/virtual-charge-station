@@ -1,5 +1,28 @@
 package templates
 
-templ Hello(name string) {
-  <div>Hello, { name }</div>
+import "github.com/l1f/virtual-charge-station/internal/data/models"
+
+templ Dashboard(stations []models.Station) {
+	@body("Dashboard") {
+		<div class="columns">
+			for _, station := range stations {
+				<div class="column">
+					@Station(station)
+				</div>
+			}
+		</div>
+	}
+}
+
+templ Station(station models.Station) {
+	<div class="card">
+		<div class="card-content">
+			<b>{ station.UID }</b>
+		</div>
+		<footer class="card-footer">
+			<a href="#" class="card-footer-item">View</a>
+			<a href="#" class="card-footer-item">Edit</a>
+			<a href="#" class="card-footer-item has-background-danger has-text-white-bis">Delete</a>
+		</footer>
+	</div>
 }
