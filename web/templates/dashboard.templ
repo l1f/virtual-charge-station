@@ -4,9 +4,10 @@ import "github.com/l1f/virtual-charge-station/internal/data/models"
 
 templ Dashboard(stations []models.Station) {
 	@body("Dashboard") {
-		<div class="columns">
+		<h1 class="title">Virtual Stations</h1>
+		<div class="columns is-multiline">
 			for _, station := range stations {
-				<div class="column">
+				<div class="column is-one-quarter">
 					@Station(station)
 				</div>
 			}
