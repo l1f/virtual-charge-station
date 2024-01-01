@@ -13,7 +13,7 @@ import (
 
 var bucketName = []byte("station")
 
-func encodeStation(encodedStation []byte) (*models.Station, error) {
+func decodeStation(encodedStation []byte) (*models.Station, error) {
 	buffer := bytes.NewBuffer(encodedStation)
 	decoder := gob.NewDecoder(buffer)
 	station := models.Station{}
@@ -23,6 +23,18 @@ func encodeStation(encodedStation []byte) (*models.Station, error) {
 	}
 
 	return &station, nil
+}
+
+func encodeStation(station models.Station) (*bytes.Buffer, error) {
+	buffer := new(bytes.Buffer)
+	encoder := gob.NewEncoder(buffer)
+
+	err := encoder.Encode(station)
+	if err != nil {
+		return nil, fmt.Errorf("Error while encode station data: %w", err)
+	}
+
+	return buffer, nil
 }
 
 func (r *Repositories) FetchAllStations() (*[]models.Station, error) {
@@ -36,7 +48,7 @@ func (r *Repositories) FetchAllStations() (*[]models.Station, error) {
 
 		cursor := bucket.Cursor()
 		for k, v := cursor.First(); k != nil; k, v = cursor.Next() {
-			station, err := encodeStation(v)
+			station, err := decodeStation(v)
 			if err != nil {
 				return err
 			}
@@ -51,8 +63,6 @@ func (r *Repositories) FetchAllStations() (*[]models.Station, error) {
 		return nil, err
 	}
 
-	//TODO: if len of stations == 0, return error
-
 	return &stations, nil
 }
 
@@ -63,12 +73,9 @@ func (r *Repositories) CreateStation(station models.Station) error {
 			return fmt.Errorf(data.ErrBucketNotFound, "station")
 		}
 
-		buffer := new(bytes.Buffer)
-		encoder := gob.NewEncoder(buffer)
-
-		err := encoder.Encode(station)
+		buffer, err := encodeStation(station)
 		if err != nil {
-			return fmt.Errorf("Error while encode station data: %w", err)
+			return err
 		}
 
 		uid, _ := uuid.NewRandom()
