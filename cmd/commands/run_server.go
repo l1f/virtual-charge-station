@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/l1f/virtual-charge-station/internal/app"
+	"github.com/l1f/virtual-charge-station/internal/data"
 	"github.com/l1f/virtual-charge-station/internal/router"
 	"github.com/urfave/cli/v2"
 )
@@ -42,8 +43,22 @@ func startServer(ctx *cli.Context) error {
 		return fmt.Errorf("Can't initialise webserver start: %w", err)
 	}
 
+	logger.Debug("Init database")
+
+	// TODO: db path to XDG config home (https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html)
+	db, err := data.Open("./db.bbold")
+	if err != nil {
+		return err
+	}
+
+	err = db.PrepareDB()
+	if err != nil {
+		return err
+	}
+
 	application := app.App{
-		Logger: logger.Sugar().Named("web"),
+		Logger: logger.Sugar(),
+		Data:   db,
 	}
 
 	return router.Start(&application)

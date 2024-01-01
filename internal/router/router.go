@@ -26,7 +26,9 @@ func getRouter(app *app.App) *chi.Mux {
 	router.Handle("/assets/*", http.StripPrefix("/assets/", http.FileServer(http.Dir("./web/assets/"))))
 
 	router.NotFound(handlers.NotFound)
-	router.Get("/dashboard", handler.Dashboard)
+	router.Get("/dashboard", handlers.Dashboard)
+
+	router.Get("/newStation", handlers.NewStation)
 
 	return router
 }

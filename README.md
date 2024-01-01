@@ -48,6 +48,9 @@ And because this is a toy project, I'm testing technologies that I've wanted to 
 
 ## Development
 
-To work on the project, you currently need a current Go compiler, templ and git. 
+To work on the project, you currently need:
+
+- Go 1.21
+- templ
 
 Optionally, you can install and use air. 

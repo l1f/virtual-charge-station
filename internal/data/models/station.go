@@ -1,6 +1,7 @@
 package models
 
 type Station struct {
-	Id  int64
-	UID string
+	UID             string
+	BackendWSUrl    string
+	BackendPassword string
 }

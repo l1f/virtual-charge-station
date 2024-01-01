@@ -9,7 +9,10 @@ require (
 
 require (
 	github.com/a-h/templ v0.2.501 // indirect
+	github.com/google/uuid v1.5.0 // indirect
+	go.etcd.io/bbolt v1.3.8 // indirect
 	go.uber.org/multierr v1.10.0 // indirect
+	golang.org/x/sys v0.14.0 // indirect
 )
 
 require (
