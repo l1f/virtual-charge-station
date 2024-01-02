@@ -35,11 +35,12 @@ func logger(logger *zap.SugaredLogger, options *Options) func(next http.Handler)
 			defer func() {
 				requestLogger := logger.With(
 					zap.String("requestId", middleware.GetReqID(r.Context())),
-					zap.String("method", r.Method),
 					zap.String("proto", r.Proto),
+					zap.String("method", r.Method),
+					zap.String("path", r.RequestURI),
 					zap.String("remoteAddr", r.RemoteAddr),
 					zap.Int("status", wrapReponse.Status()),
-					zap.Int("bytes", wrapReponse.BytesWritten()),
+					zap.Int("size", wrapReponse.BytesWritten()),
 					zap.Duration("requestDuration", timerStop),
 				)
 
