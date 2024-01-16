@@ -27,7 +27,6 @@ func getRouter(app *app.App) *chi.Mux {
 
 	router.NotFound(handlers.NotFound)
 	router.Get("/dashboard", handlers.Dashboard.Dashboard)
-
 	router.Get("/newStation", handlers.Dashboard.NewStation)
 
 	return router
